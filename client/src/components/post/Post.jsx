@@ -1,31 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./post.css";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { User } from "../../dummyData";
+
+import { usersRoute } from "../../api/api";
+import axios from "axios";
+import { format } from "timeago.js";
+import {Link} from "react-router-dom"
 
 const Post = ({ post }) => {
-  const [like, setLike] = useState(post.like);
+  const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
+  const [User, setUser] = useState({});
 
-  const  likehandler =()=>{
-    setLike(isLiked ? like -1 :like+1);
-    setIsLiked(isLiked)
-  } 
+  const likehandler = () => {
+    setLike(isLiked ? like - 1 : like + 1);
+    setIsLiked(isLiked);
+  };
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await axios.get(`${usersRoute}/${post.userId}`);
+
+      setUser(res.data);
+    };
+    fetchUser();
+  }, [post.userId]);
 
   return (
     <div className="post">
       <div className="postwarraper">
         <div className="posttop">
           <div className="posttopleft">
+          <Link to={`profile/${User.username}`} >
             <img
-              src={User.filter((u) => u.id === post?.userId)[0].profilepicture}
+              src={User.profilepicture || "/persons/avatar.png"}
               alt=""
               className="postprofileimg"
             />
-            <span className="postusername">
-              {User.filter((u) => u.id === post?.userId)[0].username}
-            </span>
-            <span className="postdate">{post.date}</span>
+            </Link>
+            <span className="postusername">{User.username}</span>
+            <span className="postdate">{format(post.createdAt)}</span>
           </div>
 
           <div className="posttopright">
@@ -34,7 +48,8 @@ const Post = ({ post }) => {
         </div>
         <div className="postcenter">
           <span className="posttext">{post?.desc}</span>
-          <img src={post.photo} alt="" className="postimg" />
+  
+          <img src={post.img} alt="" className="postimg" />
         </div>
         <div className="postbottom">
           <div className="postbottomleft">

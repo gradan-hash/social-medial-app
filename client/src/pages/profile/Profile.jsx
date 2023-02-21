@@ -1,11 +1,22 @@
-import React from "react";
+import React ,{useState,useEffect} from "react";
 import "./profile.css";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Topbar from "../../components/topbar/Topbar";
+import axios from "axios"
+import { usersRoute } from "../../api/api";
 
 const Profile = () => {
+  const [User, setUser] = useState({}); 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await axios.get(`${usersRoute}?username=cornelis`);
+
+      setUser(res.data);
+    };
+    fetchUser();
+  }, []);
   return (
     <>
       <Topbar />
@@ -18,12 +29,12 @@ const Profile = () => {
               <img src="/assets/bitch4.jpg" alt="" className="profileuserimg" />
             </div>
             <div className="profileinfor">
-              <h4 className="profileinforname">cornelius nyaa</h4>
-              <span className="profiledescp">hello my friends</span>
+              <h4 className="profileinforname">{User.username} </h4>
+              <span className="profiledescp">{User.desc}</span>
             </div>
           </div>
           <div className="profilerightbottom">
-            <Feed />
+            <Feed username="followed2"/>
             <Rightbar Profile/>
           </div>
         </div>

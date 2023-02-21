@@ -4,17 +4,21 @@ import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 import ChatIcon from "@mui/icons-material/Chat";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import { Link } from "react-router-dom";
 
 const Topbar = () => {
   return (
     <div className="topbarcontainer">
       <div className="topbarleft">
-        <span className="logo">Corneliusocial</span>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          {" "}
+          <span className="logo">Corneliusocial</span>
+        </Link>
       </div>
 
       <div className="topbarcenter">
         <div className="searchbar">
-          <SearchIcon className="searchicon"/>
+          <SearchIcon className="searchicon" />
           <input
             placeholder="search for friends, videos"
             className="searchInput"
@@ -31,10 +35,13 @@ const Topbar = () => {
             <PersonIcon />
             <span className="topbariconbadge">1</span>
           </div>
-          <div className="topbariconitem">
-            <ChatIcon />
-            <span className="topbariconbadge">1</span>
-          </div>
+          <Link to="/messenger" style={{TextDecoration: "none"}}>
+            <div className="topbariconitem">
+              <ChatIcon />
+              <span className="topbariconbadge">1</span>
+            </div>
+          </Link>
+
           <div className="topbariconitem">
             <NotificationsIcon />
             <span className="topbariconbadge">1</span>
