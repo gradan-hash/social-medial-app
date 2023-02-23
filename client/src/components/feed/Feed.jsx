@@ -12,8 +12,8 @@ const Feed = ({ username }) => {
     const fetchPost = async () => {
       const res = username
         ? await axios.get("http://localhost:8800/api/posts/profile/" + username)
-        
-        : await axios.get(`${postRoute}/timeline/63f4c9cd176acc155a7f0530`);
+
+        : await axios.get(`${postRoute}/timeline/63efcf05f555048d9f8a3693`);
       console.log(res.data);
       setPosts(res.data);
     };

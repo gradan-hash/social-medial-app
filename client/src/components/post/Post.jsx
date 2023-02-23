@@ -5,7 +5,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { usersRoute } from "../../api/api";
 import axios from "axios";
 import { format } from "timeago.js";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const Post = ({ post }) => {
   const [like, setLike] = useState(post.likes.length);
@@ -22,6 +22,7 @@ const Post = ({ post }) => {
       const res = await axios.get(`${usersRoute}/${post.userId}`);
 
       setUser(res.data);
+      console.log(res.data);
     };
     fetchUser();
   }, [post.userId]);
@@ -31,12 +32,12 @@ const Post = ({ post }) => {
       <div className="postwarraper">
         <div className="posttop">
           <div className="posttopleft">
-          <Link to={`profile/${User.username}`} >
-            <img
-              src={User.profilepicture || "/persons/avatar.png"}
-              alt=""
-              className="postprofileimg"
-            />
+            <Link to={`profile/${User.username}`}>
+              <img
+                src={User.profilepicture || "/persons/avatar.png"}
+                alt=""
+                className="postprofileimg"
+              />
             </Link>
             <span className="postusername">{User.username}</span>
             <span className="postdate">{format(post.createdAt)}</span>
@@ -48,7 +49,7 @@ const Post = ({ post }) => {
         </div>
         <div className="postcenter">
           <span className="posttext">{post?.desc}</span>
-  
+
           <img src={post.img} alt="" className="postimg" />
         </div>
         <div className="postbottom">

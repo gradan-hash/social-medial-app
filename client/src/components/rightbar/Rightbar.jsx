@@ -1,9 +1,10 @@
 import React from "react";
 import "./rightbar.css";
-import { User } from "../../dummyData";
-import Online from "../online/Online";
 
-const Rightbar = ({ Profile }) => {
+import Online from "../online/Online";
+import { Userss } from "../../dummyData";
+
+const Rightbar = ({ User }) => {
   const HomeRightBar = () => {
     return (
       <>
@@ -16,7 +17,7 @@ const Rightbar = ({ Profile }) => {
         <img className="rightbarAd" src="/assets/bitch4.jpg" alt="" />
         <h4 className="rightbartitle">Online Friends</h4>
         <ul className="rightbarfriendlist">
-          {User.map((u) => (
+          {Userss.map((u) => (
             <Online key={u.id} user={u} />
           ))}
         </ul>
@@ -31,15 +32,15 @@ const Rightbar = ({ Profile }) => {
         <div className="rightbarinfor">
           <div className="rightbarinforitems">
             <span className="rightbarinfokey">City</span>
-            <span className="rightbarinfovalue">Newyork</span>
+            <span className="rightbarinfovalue">{User.city || "weka city "}</span>
           </div>
           <div className="rightbarinforitems">
             <span className="rightbarinfokey">From </span>
-            <span className="rightbarinfovalue">Madrid</span>
+            <span className="rightbarinfovalue">{User.from || "empty"}</span>
           </div>
           <div className="rightbarinforitems">
             <span className="rightbarinfokey">Relationship</span>
-            <span className="rightbarinfovalue">single</span>
+            <span className="rightbarinfovalue">{User.relationship ===1 ? "Single":User.relationship ===2 ? "married" : "empty"}</span>
           </div>
         </div>
 
@@ -112,7 +113,7 @@ const Rightbar = ({ Profile }) => {
   return (
     <div className="rightbar">
       <div className="rightbarwrapper">
-      {Profile ? <ProfileRightBar/> :<HomeRightBar/> }
+      {User ? <ProfileRightBar/> :<HomeRightBar/> }
       </div>
     </div>
   );

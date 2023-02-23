@@ -9,7 +9,7 @@ import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import WorkIcon from "@mui/icons-material/Work";
 import EventIcon from "@mui/icons-material/Event";
 import CastForEducationIcon from "@mui/icons-material/CastForEducation";
-import { User } from "../../dummyData";
+import { Userss } from "../../dummyData";
 import Closefriends from "../friends/Closefriends";
 const Sidebar = () => {
   return (
@@ -64,7 +64,7 @@ const Sidebar = () => {
         <button className="sidebarButton">Show More</button>
         <hr className="sidebarhr"></hr>
         <ul className="sidebarfriendlist">
-          {User.map((u) => (
+          {Userss.map((u) => (
             <Closefriends key={u.id} user={u} />
           ))}
         </ul>

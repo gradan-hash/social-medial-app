@@ -40,20 +40,60 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-//get a user
-router.get("/", async (req, res) => {
-  const userId = req.query.userId;
-  const username = req.query.username;
+// //get a user
+// router.get("/:userId ? : username", async (req, res) => {
+//   const userId = req.params.userId;
+//   const username = req.params.username;
+//   try {
+//     const user = userId
+//       ? await User.findById(userId)
+//       : await User.findOne({ username: username });
+
+//     if (!user) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
+
+//     const { password, updatedAt, ...other } = user._doc;
+//     res.status(200).json(other);
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json(err);
+//   }
+// });
+
+
+// get a user
+router.get("/:identifier", async (req, res) => {
+  const identifier = req.params.identifier;
+  
+  // check if identifier is a valid ObjectId (i.e. userId)
+  const isObjectId = /^[0-9a-fA-F]{24}$/.test(identifier);
+  
   try {
-    const user = userId
-      ? await User.findById(userId)
-      : await User.findOne({ username: username });
+    const user = isObjectId
+      ? await User.findById(identifier)
+      : await User.findOne({ username: identifier });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
     const { password, updatedAt, ...other } = user._doc;
     res.status(200).json(other);
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
+
+
+
+
+
+
+
+
+
 
 //get friends
 router.get("/friends/:userId", async (req, res) => {
@@ -69,7 +109,7 @@ router.get("/friends/:userId", async (req, res) => {
       const { _id, username, profilePicture } = friend;
       friendList.push({ _id, username, profilePicture });
     });
-    res.status(200).json(friendList)
+    res.status(200).json(friendList);
   } catch (err) {
     res.status(500).json(err);
   }
