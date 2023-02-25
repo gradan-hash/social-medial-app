@@ -60,6 +60,10 @@
   font-weight: 400;
   cursor: pointer;
 }
+
+.loginbutton:disabled{
+  cursor: not-allowed;
+}
 .loginforgot {
   text-align: center;
   color: blue;
@@ -75,4 +79,9 @@
   font-size: 20px;
   font-weight: 400;
   cursor: pointer;
+}
+
+.circle{
+  color:white;
+   font-size: 20px;
 }

@@ -1,37 +1,41 @@
-.message{
+.message {
   display: flex;
   flex-direction: column;
   margin-top: 20px;
-
 }
 
-.messagetop{
-  display: flex;
-
+.messageTop{
+    display: flex;
 }
-.messageimg{
-  height: 32px;
+
+.messageImg {
   width: 32px;
-  object-fit: cover;
+  height: 32px;
   border-radius: 50%;
+  object-fit: cover;
   margin-right: 10px;
 }
-.messagetext{
-  padding: 10px;
-  border-radius: 20px;
-  background-color: rgb(68, 68, 243);
-  color: white;
-  max-width: 300px;
-}
-.messagebotom{
-  font-size: 12px;
-  margin: 10px;
+
+.messageText{
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #1877f2;
+    color: white;
+    max-width: 300px;
+  
 }
 
-.message.own{
-  align-items: flex-end;
+.messageBottom{
+    font-size: 12px;
+    margin-top: 10px;
 }
-.message.own .messagetext{
-  background-color: rgb(241, 231, 231);
-  color: black;
+
+.messageown{
+    align-items: flex-start;
+  
+}
+
+.messageown .messageText{
+    background-color: rgb(245, 241, 241);
+    color: black;
 }

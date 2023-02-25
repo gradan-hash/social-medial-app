@@ -1,13 +1,13 @@
-import React from 'react'
-import "./message.css"
-export const Message = ({own}) => {
+import { format } from "timeago.js";
+import "./message.css";
+export default function Message({ message, own }) {
   return (
-    <div className={own ? "message own" : "message"}> 
-    <div className='messagetop'>
-      <img src='assets/bitch3.jpg' alt="" className='messageimg' />
-      <p className='messagetext'>hello this is a message from the user</p>
+    <div className={own ? "messageown" : "message"}>
+      <div className="messageTop">
+        <img className="messageImg" src="assets/bitch3.jpg" alt="" />
+        <p className="messageText">{message.text}</p>
+      </div>
+      <div className="messageBottom">{format(message.createdAt)}</div>
     </div>
-    <div className='messagebotom'>1 hour ago</div>
-    </div>
-  )
+  );
 }
