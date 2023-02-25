@@ -30,7 +30,7 @@ io.on("connection", (socket) => {
 
   //send and get  message
 
-  socket.on("sendMessage", (senderId, receiverId, text) => {
+  socket.on("sendMessage", ({senderId, receiverId, text}) => {
     const user = getUser(receiverId);
     if (user) {
       io.to(user.socketId).emit("getMessage", {
@@ -44,9 +44,9 @@ io.on("connection", (socket) => {
 
   //when disconnected
 
-  socket.on("disconnect", (socketId) => {
+  socket.on("disconnect", () => {
     console.log("user disconnected");
-    removeUser(socketId);
+    removeUser(socket.Id);
     io.emit("getUsers", users);
   });
 });
